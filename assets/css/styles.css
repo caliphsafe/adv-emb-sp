@@ -138,3 +138,41 @@
     align-self:flex-start;
   }
 }
+
+/* Header and compact badge alignment correction — 2026-08-04 */
+/* Keep the mobile navigation trigger completely hidden on desktop. */
+.menu-button{
+  display:none;
+}
+
+/* Center short number/letter markers optically and mathematically. */
+.trust-icon{
+  display:grid;
+  place-items:center;
+  align-content:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1;
+  padding:1px 0 0;
+  overflow:hidden;
+}
+
+/* Preserve the intended mobile menu control only at tablet/mobile widths. */
+@media(max-width:980px){
+  .menu-button{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    min-width:44px;
+    padding:0;
+    margin-left:auto;
+  }
+
+  .menu-button span{
+    flex:0 0 auto;
+    margin:3px 0;
+  }
+}
