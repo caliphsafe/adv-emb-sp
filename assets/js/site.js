@@ -18,6 +18,30 @@
   const langBtns=$$('.lang-switch button');langBtns.forEach(btn=>btn.addEventListener('click',()=>{langBtns.forEach(b=>b.classList.toggle('active',b===btn));$$('.language-panel').forEach(p=>p.classList.toggle('active',p.dataset.lang===btn.dataset.lang))}));
   const uniformForm=$('#uniformForm');if(uniformForm){const calc=()=>{let total=0,items=[];$$('[data-price]',uniformForm).forEach(i=>{const q=Math.max(0,Number(i.value)||0);if(q){total+=q*Number(i.dataset.price);items.push(`${i.dataset.product} ${i.dataset.size}: ${q}`)}});$('#uniformTotal').textContent=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(total);const hidden=$('#uniformSummary');if(hidden)hidden.value=items.join('\n')+`\nEstimated total: $${total.toFixed(2)}`};$$('[data-price]',uniformForm).forEach(i=>i.addEventListener('input',calc));uniformForm.addEventListener('reset-complete',()=>setTimeout(calc));calc()}
 
+  const rushDates=$$('[data-rush-date]');
+  const dateOnly=(date)=>new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  const rushDetails=(value)=>{
+    if(!value)return {charge:'No rush charge indicated',window:'Date not selected',message:'Orders needed 10–15 calendar days from today carry a $50 rush charge. Orders needed in fewer than 10 days carry a $100 rush charge, subject to availability.',state:''};
+    const selected=new Date(`${value}T00:00:00`);
+    const days=Math.ceil((dateOnly(selected)-dateOnly(new Date()))/86400000);
+    if(days<0)return {charge:'Date requires review',window:'Past date selected',message:'Please select a future date. Call 508-678-8993 if the date is urgent.',state:'error'};
+    if(days<10)return {charge:'$100 rush charge',window:`${days} day${days===1?'':'s'} from request`,message:'This requested date is fewer than 10 days away. A $100 rush charge applies if the order can be accepted.',state:'active'};
+    if(days<=15)return {charge:'$50 rush charge',window:`${days} days from request`,message:'This requested date is 10–15 days away. A $50 rush charge applies if the order can be accepted.',state:'active'};
+    return {charge:'No rush charge indicated',window:`${days} days from request`,message:'This date is currently outside the rush-charge window. Final timing is confirmed after the project is reviewed.',state:'clear'};
+  };
+  rushDates.forEach(input=>{
+    const form=input.closest('form');
+    const guidance=form?.querySelector('[data-rush-guidance]');
+    const charge=form?.querySelector('[data-rush-charge]');
+    const windowField=form?.querySelector('[data-rush-window]');
+    const update=()=>{const details=rushDetails(input.value);if(guidance){guidance.textContent=details.message;guidance.dataset.state=details.state}if(charge)charge.value=details.charge;if(windowField)windowField.value=details.window};
+    input.min=new Date().toISOString().split('T')[0];
+    input.addEventListener('change',update);
+    input.addEventListener('input',update);
+    form?.addEventListener('reset-complete',()=>setTimeout(update));
+    update();
+  });
+
   const project = new URLSearchParams(location.search).get('project');
   if(project){
     const map={business:'Business or staff apparel',school:'School or organization',team:'Team or department',event:'Event or personal order',program:'School or organization'};

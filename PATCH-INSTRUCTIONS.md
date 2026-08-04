@@ -1,56 +1,31 @@
-# Advanced Embroidery Gmail + Logo Patch
+# Advanced Embroidery Rush Policy Patch
 
-This patch removes Resend and FormSubmit. The forms post to the website's own `/api/contact` Vercel Function, which signs in to the listed Gmail account through Gmail SMTP using a Google App Password.
+Upload the contents of this patch to the root of the existing GitHub repository and allow the files to replace the matching files.
 
-## Replace/add these files
+## Updated policy
 
-Upload the full contents of this patch to the repository, preserving the folders. Choose **Commit changes** after uploading.
+- Orders needed 10–15 calendar days from the request date: $50 rush charge.
+- Orders needed in fewer than 10 calendar days: $100 rush charge.
+- Rush work remains subject to product availability and production capacity.
 
-Important files:
+## Updated files
 
-- `api/contact.js`
-- `assets/js/site.js`
-- `assets/css/styles.css`
-- `assets/logo/logo.png`
-- `package.json`
-- `.env.example` is an example only and does not contain the real password.
-- All included HTML files replace the inline generated logo with `/assets/logo/logo.png`.
+- assets/js/site.js
+- assets/css/styles.css
+- order/index.html
+- espirito-santo/index.html
+- services/index.html
+- embroidery/index.html
+- screen-printing/index.html
+- dtf-printing/index.html
+- how-it-works/index.html
+- faq/index.html
+- terms/index.html
 
-Delete the previous FormSubmit `thank-you` page only if you do not want to keep it. It is no longer used by the AJAX forms.
+## Form behavior
 
-## Logo
+The date-needed field now calculates the applicable rush window automatically. The customer sees a quiet contextual message under the date field, and the submitted email includes both `rushCharge` and `rushWindow` values for the team.
 
-The website now reads the header and footer logo from:
+The uniform merchandise total does not automatically add the rush charge. The applicable fee is clearly noted and should be confirmed before finalizing the order.
 
-`assets/logo/logo.png`
-
-A working PNG version of the current generated mark is included so the site will not show a broken image. Replace that exact file later with the client's actual `logo.png`. Keep the filename and folder unchanged. A wide transparent PNG is recommended.
-
-## Vercel Environment Variables
-
-Add:
-
-- `GMAIL_USER` = `mpimentel1363@gmail.com`
-- `GMAIL_APP_PASSWORD` = the 16-character Google App Password, entered without spaces
-- `CONTACT_TO_EMAIL` = `mpimentel1363@gmail.com`
-
-Do not use the normal Gmail password.
-
-After adding or changing variables, redeploy the website. Environment-variable changes only apply to a new deployment.
-
-## Google setup
-
-1. Sign in to the Google account for `mpimentel1363@gmail.com`.
-2. Open Google Account > Security.
-3. Turn on 2-Step Verification.
-4. Search the Google Account settings for **App passwords**.
-5. Create an app password named `Advanced Embroidery Website`.
-6. Copy the 16-character password and save it as `GMAIL_APP_PASSWORD` in Vercel.
-
-## Test
-
-After Vercel finishes redeploying, submit the Contact form, Custom Order form, and Espirito Santo form. Confirm each arrives at `mpimentel1363@gmail.com`. Test one small artwork attachment as well. Pressing Reply on a submission will address the customer's email because the function sets Reply-To.
-
-## Deployment note
-
-This patch intentionally includes no `package-lock.json`. Vercel will install Nodemailer from `package.json` during deployment.
+No new Vercel environment variables are required. Existing Gmail form settings remain unchanged.
