@@ -34,3 +34,107 @@
 .faq-question{padding:26px 2px}.faq-answer{padding-bottom:28px}.contact-cards{gap:18px}.contact-card{padding:25px}.footer-grid{align-items:start}
 @media(max-width:980px){:root{--space-section:82px;--space-section-sm:56px}.service-card{min-height:340px}.process-step{min-height:220px}.card{padding:29px}}
 @media(max-width:680px){:root{--space-section:68px;--space-section-sm:48px}.section>.container>.center+.grid-2,.section>.container>.center+.grid-3,.section>.container>.center+.grid-4,.section>.container>.center+.process-grid,.section>.container>.center+.gallery-grid{margin-top:36px!important}.card,.service-card{padding:25px;min-height:auto}.service-card>.btn,.service-card>.text-link{padding-top:22px}.process-step{min-height:auto;padding:25px 0}.form-header,.form-body{padding:25px}.rush-policy-note{margin-bottom:28px!important}.notice,.rush-policy-note{padding:16px 16px 16px 46px}.notice:before,.rush-policy-note:before{left:15px;top:15px}}
+
+/* Service-page card rhythm and compact-control alignment refinement */
+.btn{
+  box-sizing:border-box;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  vertical-align:middle;
+  line-height:1.2;
+  min-height:52px;
+  padding:0 24px;
+}
+
+/* Keep only compact visual containers centered; normal copy remains left aligned. */
+.icon-box,
+.trust-icon,
+.lang-switch button,
+.menu-button,
+.qty input{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1;
+}
+
+.icon-box img,
+.trust-icon img{
+  display:block;
+  margin:auto;
+}
+
+.trust-icon{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  min-height:38px;
+  padding:0;
+}
+
+/* Dedicated services-page card layout: consistent content rhythm and button gap. */
+.services-page .grid-2{
+  align-items:stretch;
+}
+
+.services-page .service-card{
+  display:grid;
+  grid-template-rows:auto auto auto auto 1fr auto;
+  min-height:100%;
+  align-content:start;
+}
+
+.services-page .service-card .icon-box{
+  margin-bottom:28px;
+}
+
+.services-page .service-card > .eyebrow{
+  margin-bottom:20px;
+}
+
+.services-page .service-card > .h2{
+  margin:0 0 20px;
+}
+
+.services-page .service-card > p{
+  margin:0 0 24px;
+}
+
+.services-page .service-card > .check-list{
+  align-self:end;
+  margin:0;
+  padding-bottom:30px;
+}
+
+.services-page .service-card > .btn{
+  align-self:end;
+  justify-self:start;
+  margin:0;
+  padding:0 28px;
+  min-height:54px;
+}
+
+/* Undo the older rule that placed spacing inside service buttons. */
+.services-page .service-card > .btn,
+.services-page .service-card > .text-link{
+  padding-top:0;
+}
+
+@media(max-width:680px){
+  .services-page .service-card{
+    display:flex;
+    min-height:auto;
+  }
+
+  .services-page .service-card > .check-list{
+    align-self:stretch;
+    padding-bottom:26px;
+  }
+
+  .services-page .service-card > .btn{
+    align-self:flex-start;
+  }
+}
