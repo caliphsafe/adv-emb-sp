@@ -34,3 +34,10 @@ The accompanying PrintFlow patch calculates the school-order rush fee server-sid
 
 ## Deployment
 Upload this full folder to the existing Advanced repository. Do not add `package-lock.json`.
+
+## Staff admin access
+Advanced staff should use `/admin/` on the Advanced website as a private shortcut.
+That route redirects to the configured PrintFlow `/login` page. After successful
+login, PrintFlow sends the authenticated shop owner to `/dashboard`.
+
+This shortcut is intentionally not exposed in the public navigation.
