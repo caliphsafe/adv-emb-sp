@@ -1,53 +1,6 @@
 {
   "cleanUrls": true,
-  "trailingSlash": true,
-  "redirects": [
-    {
-      "source": "/about-us",
-      "destination": "/about/",
-      "permanent": true
-    },
-    {
-      "source": "/our-services",
-      "destination": "/services/",
-      "permanent": true
-    },
-    {
-      "source": "/order",
-      "destination": "/order/",
-      "permanent": true
-    },
-    {
-      "source": "/custom-order",
-      "destination": "/order/",
-      "permanent": true
-    },
-    {
-      "source": "/ez-order",
-      "destination": "/order/",
-      "permanent": true
-    },
-    {
-      "source": "/espirito-santo-parochial-uniform",
-      "destination": "/espirito-santo/",
-      "permanent": true
-    },
-    {
-      "source": "/espirito-santo-school-uniform-order-page",
-      "destination": "/espirito-santo/",
-      "permanent": true
-    },
-    {
-      "source": "/contact-us",
-      "destination": "/contact/",
-      "permanent": true
-    },
-    {
-      "source": "/category/all-products",
-      "destination": "/school-stores/",
-      "permanent": true
-    }
-  ],
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -65,15 +18,38 @@
           "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/custom-order",
+      "destination": "/order/custom.html",
+      "permanent": true
     },
     {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "source": "/espirito-santo-parochial-uniform",
+      "destination": "/order/espirito-santo.html",
+      "permanent": true
+    },
+    {
+      "source": "/espirito-santo-school-uniform-order-page",
+      "destination": "/order/espirito-santo.html",
+      "permanent": true
+    },
+    {
+      "source": "/our-services",
+      "destination": "/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact.html",
+      "permanent": true
     }
   ]
 }
