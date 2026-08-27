@@ -176,3 +176,8 @@
     margin:3px 0;
   }
 }
+
+
+/* Advanced + PrintFlow ordering integration — scoped additions only. */
+.order-path-card{height:100%;display:flex;flex-direction:column}.order-path-title{font-size:clamp(1.8rem,3vw,2.7rem)}.order-path-card .check-list{margin-bottom:28px}.order-path-action{margin-top:auto;align-self:flex-start}.order-quote-card{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:36px}.order-quote-card .lead{margin-bottom:0}.printflow-shell{overflow:visible}.printflow-embed{min-height:900px;background:#fff}.printflow-loading{min-height:620px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:40px;color:var(--muted)}.printflow-loading strong{font-size:1.35rem;color:var(--navy)}.printflow-loading code{background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:2px 6px;color:var(--navy)}.printflow-loading .btn{margin-top:10px}.printflow-frame{display:block;width:100%;min-height:1200px;border:0;background:#fff}.form-status.show:not(.success):not(.error){background:#eef3f7;color:var(--navy)}
+@media(max-width:680px){.order-quote-card{align-items:flex-start;flex-direction:column}.printflow-embed{min-height:760px}.printflow-frame{min-height:1100px}.printflow-loading{min-height:480px;padding:28px 18px}}
