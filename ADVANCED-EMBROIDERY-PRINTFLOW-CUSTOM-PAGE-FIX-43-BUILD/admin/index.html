@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Advanced Staff Login</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/assets/css/styles.css">
+<style>
+html,body{min-height:100%}
+.admin-shortcut-shell{min-height:100vh;display:grid;place-items:center;padding:32px;background:var(--paper,#f5f2ec)}
+.admin-shortcut-card{width:min(680px,100%);background:#fff;border:1px solid var(--line,#d9dde2);border-radius:20px;padding:36px;box-shadow:0 20px 60px rgba(11,32,56,.08)}
+.admin-shortcut-card h1{margin:.3rem 0 1rem;color:var(--navy,#0b2038)}
+.admin-shortcut-card p{color:var(--muted,#65717e);line-height:1.6}
+</style>
+</head>
+<body>
+<main class="admin-shortcut-shell">
+<section class="admin-shortcut-card">
+<span class="eyebrow">ADVANCED STAFF</span>
+<h1>Opening PrintFlow admin…</h1>
+<p id="adminStatus">This private shortcut sends Advanced staff to the PrintFlow owner login. It is not linked in the customer navigation.</p>
+<p><a class="btn btn-primary" id="adminButton" href="/order/">Return to Advanced</a></p>
+</section>
+</main>
+<script src="/assets/js/printflow-config.js"></script>
+<script>
+(function(){
+  var cfg = window.ADVANCED_PRINTFLOW || {};
+  var base = String(cfg.baseUrl || "").replace(/\/$/, "");
+  var status = document.getElementById("adminStatus");
+  var button = document.getElementById("adminButton");
+  if (!base) {
+    status.textContent = "PrintFlow is not configured yet. Set baseUrl in /assets/js/printflow-config.js, then this page will send staff directly to PrintFlow login.";
+    button.textContent = "Return to Advanced";
+    return;
+  }
+  var target = base + "/login";
+  button.href = target;
+  button.textContent = "Open PrintFlow Login";
+  status.textContent = "If you are not redirected automatically, use the button below.";
+  setTimeout(function(){ window.location.replace(target); }, 350);
+})();
+</script>
+</body>
+</html>

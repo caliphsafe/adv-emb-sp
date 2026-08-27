@@ -1,0 +1,15 @@
+{
+  "name": "Advanced Embroidery & Screen Printing",
+  "short_name": "Advanced Embroidery",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b2038",
+  "icons": [
+    {
+      "src": "/assets/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
