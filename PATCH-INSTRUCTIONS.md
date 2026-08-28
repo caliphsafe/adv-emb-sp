@@ -1,5 +1,15 @@
-# Advanced Embroidery spacing and rush-visibility patch
+# Advanced Embroidery — Ordering Process Cleanup Patch
 
-Upload the contents of this folder to the repository root and replace matching files.
+Replace this file in the repository:
 
-This patch improves site-wide section rhythm, card alignment, service-button spacing, circular icon centering, form spacing, FAQ spacing, and rush-policy visibility. No Gmail or Vercel environment settings change.
+- `order/index.html`
+
+## Changes
+
+- Removed the SanMar product-number field from the customer order form.
+- Expanded the garment-color field and clarified that it is optional.
+- Added reassurance that the Advanced Embroidery team will recommend garments after reviewing the project.
+- Replaced the instruction to browse SanMar and save product numbers with customer-friendly garment-selection guidance.
+- Replaced the order-page footer's external SanMar link with an internal “How Ordering Works” link.
+
+No CSS, JavaScript, Gmail, or Vercel environment-variable changes are required.

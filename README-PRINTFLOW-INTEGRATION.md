@@ -41,3 +41,16 @@ That route redirects to the configured PrintFlow `/login` page. After successful
 login, PrintFlow sends the authenticated shop owner to `/dashboard`.
 
 This shortcut is intentionally not exposed in the public navigation.
+
+## Live PrintFlow connection
+
+Advanced is configured to use:
+
+- PrintFlow base URL: `https://printflow-bcjh.vercel.app`
+- Advanced shop slug: `advanced-embroidery-screen-printing`
+- Advanced customer storefront: `https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing`
+- Advanced staff login: `https://printflow-bcjh.vercel.app/login`
+- Advanced site private shortcut: `/admin/`
+
+`/order/custom/` now ships its CSS, logo, config, and JavaScript inside the same
+folder so Vercel does not need to resolve root `/assets/...` paths for that route.
