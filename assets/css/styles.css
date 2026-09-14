@@ -144,9 +144,9 @@ strong{font-weight:800}
   color:#fff;
   border-bottom:1px solid rgba(255,255,255,.09);
 }
-.nav{min-height:80px;display:flex;align-items:center;gap:28px}
-.brand{display:flex;align-items:center;width:auto;max-width:260px;color:#fff}
-.brand svg,.brand img{display:block;width:auto;max-width:100%;height:auto;max-height:60px;object-fit:contain}
+.nav{min-height:92px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;width:auto;max-width:330px;color:#fff;flex:0 0 auto}
+.brand svg,.brand img{display:block;width:auto;max-width:100%;height:auto;max-height:76px;object-fit:contain}
 .nav-links{display:flex;align-items:center;gap:25px;margin-left:auto;font-size:.95rem;font-weight:700}
 .nav-links a{opacity:.84;line-height:1.2}
 .nav-links a:hover,.nav-links a[aria-current="page"]{opacity:1}
@@ -574,8 +574,8 @@ strong{font-weight:800}
   :root{--space-section:82px;--space-section-sm:56px}
   .announcement-inner span:first-child{display:none}
   .announcement-inner{justify-content:center}
-  .nav{min-height:70px}
-  .brand{max-width:180px}
+  .nav{min-height:78px}
+  .brand{max-width:220px}
   .nav-links,.nav-cta{display:none}
   .menu-button{
     display:flex;
@@ -679,4 +679,19 @@ strong{font-weight:800}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+
+/* Header logo scale refinement — 2026-09-14 */
+.site-header .brand img,
+.site-header .brand svg{
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  object-position:left center;
+}
+@media(max-width:680px){
+  .site-header .brand{max-width:205px}
+  .site-header .brand img,
+  .site-header .brand svg{max-height:66px}
 }
