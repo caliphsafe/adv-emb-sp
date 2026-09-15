@@ -3,6 +3,11 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/order/custom/",
+      "destination": "https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing",
+      "permanent": false
+    },
+    {
       "source": "/about-us",
       "destination": "/about/",
       "permanent": true
