@@ -14,6 +14,7 @@
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preconnect" href="https://printflow-bcjh.vercel.app" crossorigin>
   <style>
     .custom-order-heading{padding:20px 0;background:#f5f6f4;border-bottom:1px solid #dce2e7}
     .custom-order-heading-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
@@ -23,8 +24,13 @@
     .custom-order-heading h1{margin:0;font-size:clamp(1.55rem,2.5vw,2.15rem);line-height:1.15;letter-spacing:-.035em;color:#0b2038}
     .custom-order-help{margin:0;color:#5e6875;font-size:.93rem;text-align:right}
     .custom-order-help a{color:#0b2038;font-weight:800;white-space:nowrap}
-    .custom-order-embed{width:100%;min-height:1250px;background:#fff;overflow:visible}
+    .custom-order-embed{position:relative;width:100%;min-height:1250px;background:#fff;overflow:visible}
     .custom-order-embed iframe{display:block;width:100%!important;height:1250px;min-height:1250px;border:0}
+    .custom-order-loading{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:28px;text-align:center;background:#fff;color:#5e6875}
+    .custom-order-loading[hidden]{display:none!important}
+    .custom-order-loading strong{color:#0b2038;font-size:1.05rem}
+    .custom-order-loading-mark{width:30px;height:30px;border:3px solid #dce2e7;border-top-color:#d83d49;border-radius:50%;animation:custom-order-spin .8s linear infinite}
+    @keyframes custom-order-spin{to{transform:rotate(360deg)}}
     .custom-order-embed noscript{display:block;padding:24px;text-align:center;color:#5e6875}
     .custom-order-embed noscript a{font-weight:800;color:#0b2038;text-decoration:underline}
     @media(max-width:680px){
@@ -34,6 +40,7 @@
       .custom-order-embed{min-height:1100px}
       .custom-order-embed iframe{height:1100px;min-height:1100px}
     }
+    @media(prefers-reduced-motion:reduce){.custom-order-loading-mark{animation:none}}
   </style>
 </head>
 <body class="order-landing-page">
@@ -90,24 +97,96 @@
   </section>
 
   <section class="custom-order-embed" aria-label="Advanced Embroidery custom apparel order form">
+    <div class="custom-order-loading" id="customOrderLoading" role="status" aria-live="polite">
+      <span class="custom-order-loading-mark" aria-hidden="true"></span>
+      <strong>Loading your custom apparel order</strong>
+      <span>Connecting to Advanced’s secure ordering experience…</span>
+    </div>
     <script>
       (() => {
         const printflowOrigin = 'https://printflow-bcjh.vercel.app';
         const embedSection = document.currentScript.parentElement;
-        window.addEventListener('message', (event) => {
-          if (event.origin !== printflowOrigin || !event.data || event.data.type !== 'printflow:resize') return;
-          const frame = [...embedSection.querySelectorAll('iframe')].find((item) => item.contentWindow === event.source);
-          if (!frame) return;
-          const reportedHeight = Number(event.data.height);
-          if (!Number.isFinite(reportedHeight) || reportedHeight <= 0) return;
-          const height = Math.max(900, Math.min(16000, Math.ceil(reportedHeight)));
+        const loadingStatus = document.getElementById('customOrderLoading');
+        const defaultHeight = () => window.matchMedia('(max-width: 680px)').matches ? 1100 : 1250;
+        const frameLoads = new WeakMap();
+        let activeView = '';
+        let activeRoute = '';
+
+        const frameFor = (source) =>
+          [...embedSection.querySelectorAll('iframe')].find((frame) => frame.contentWindow === source);
+
+        const prepareFrames = () => {
+          embedSection.querySelectorAll('iframe').forEach((frame) => {
+            if (frame.loading !== 'eager') frame.loading = 'eager';
+            if (frame.getAttribute('fetchpriority') !== 'high') frame.setAttribute('fetchpriority', 'high');
+          });
+        };
+
+        const frameObserver = new MutationObserver(prepareFrames);
+        frameObserver.observe(embedSection, { childList: true, subtree: true, attributes: true, attributeFilter: ['src', 'loading'] });
+        prepareFrames();
+
+        const setPageHeight = (frame, reportedHeight) => {
+          const rawHeight = Number(reportedHeight);
+          const height = Number.isFinite(rawHeight) && rawHeight > 0
+            ? Math.max(320, Math.min(20000, Math.ceil(rawHeight)))
+            : defaultHeight();
+          embedSection.style.setProperty('min-height', `${height}px`, 'important');
           frame.style.setProperty('height', `${height}px`, 'important');
-          frame.style.setProperty('min-height', '0', 'important');
+          frame.style.setProperty('min-height', '0px', 'important');
           frame.setAttribute('scrolling', 'no');
+        };
+
+        const routeFrom = (data) =>
+          [data.pathname, data.path, data.route, data.url]
+            .find((value) => typeof value === 'string' && value.length) || '';
+
+        const showEmbedTop = (frame) => {
+          window.requestAnimationFrame(() => {
+            const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height || 0;
+            const top = window.scrollY + frame.getBoundingClientRect().top - headerHeight - 8;
+            window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+          });
+        };
+
+        embedSection.addEventListener('load', (event) => {
+          const frame = event.target;
+          if (frame?.tagName !== 'IFRAME') return;
+          const count = (frameLoads.get(frame) || 0) + 1;
+          frameLoads.set(frame, count);
+          const frameSourceUrl = frame.getAttribute('src') || frame.src;
+          if (frameSourceUrl && frameSourceUrl !== 'about:blank') loadingStatus.hidden = true;
+          if (count === 1) return;
+          activeView = '';
+          activeRoute = '';
+          setPageHeight(frame);
+          showEmbedTop(frame);
+        }, true);
+
+        window.addEventListener('message', (event) => {
+          if (event.origin !== printflowOrigin || !event.data) return;
+          const frame = frameFor(event.source);
+          if (!frame) return;
+          loadingStatus.hidden = true;
+
+          const nextRoute = routeFrom(event.data);
+          const nextView = typeof event.data.view === 'string' ? event.data.view : '';
+          const isViewChange = event.data.type === 'printflow:view' && Boolean(activeView || activeRoute);
+          const isRouteChange = Boolean(nextRoute && activeRoute && nextRoute !== activeRoute);
+
+          if (isViewChange || isRouteChange || event.data.type === 'printflow:navigate' || event.data.type === 'printflow:route') {
+            showEmbedTop(frame);
+          }
+          if (nextView) activeView = nextView;
+          if (nextRoute) activeRoute = nextRoute;
+
+          if (event.data.type === 'printflow:view' || event.data.type === 'printflow:resize' || event.data.type === 'printflow:navigate' || event.data.type === 'printflow:route') {
+            setPageHeight(frame, event.data.height);
+          }
         });
       })();
     </script>
-    <script src="https://printflow-bcjh.vercel.app//embed.js" data-shop="advanced-embroidery-screen-printing"></script>
+    <script async fetchpriority="high" src="https://printflow-bcjh.vercel.app/embed.js" data-shop="advanced-embroidery-screen-printing"></script>
     <noscript>Enable JavaScript to use the custom order form, or <a href="https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing">open the secure order page</a>.</noscript>
   </section>
 </main>
