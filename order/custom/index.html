@@ -3,24 +3,130 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Advanced Embroidery Custom Ordering</title>
-  <meta name="robots" content="noindex">
-  <meta http-equiv="refresh" content="0;url=https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing">
-  <link rel="canonical" href="https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing">
+  <title>Custom Apparel Ordering | Advanced Embroidery</title>
+  <meta name="description" content="Build your custom apparel order with Advanced Embroidery &amp; Screen Printing in New Bedford, Massachusetts.">
+  <link rel="canonical" href="https://www.advancedembroideryma.com/order/custom/">
+  <meta property="og:title" content="Custom Apparel Ordering | Advanced Embroidery">
+  <meta property="og:description" content="Choose an Advanced-approved garment, customize your order and continue to secure checkout.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.advancedembroideryma.com/order/custom/">
+  <meta name="theme-color" content="#0b2038">
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/assets/css/styles.css">
   <style>
-    body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f6f4;color:#0b2038}
-    main{width:min(90%,560px);padding:40px;text-align:center;background:#fff;border:1px solid #dce2e7;border-radius:24px;box-shadow:0 22px 70px rgba(8,28,48,.12)}
-    a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:18px;padding:0 22px;border-radius:999px;background:#d83d49;color:#fff;text-decoration:none;font-weight:800}
+    .custom-order-heading{padding:20px 0;background:#f5f6f4;border-bottom:1px solid #dce2e7}
+    .custom-order-heading-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .custom-order-heading .breadcrumb{margin:0 0 5px;color:#5e6875}
+    .custom-order-heading .breadcrumb a{color:#0b2038;font-weight:700}
+    .custom-order-heading .eyebrow{font-size:.72rem}
+    .custom-order-heading h1{margin:0;font-size:clamp(1.55rem,2.5vw,2.15rem);line-height:1.15;letter-spacing:-.035em;color:#0b2038}
+    .custom-order-help{margin:0;color:#5e6875;font-size:.93rem;text-align:right}
+    .custom-order-help a{color:#0b2038;font-weight:800;white-space:nowrap}
+    .custom-order-embed{width:100%;min-height:calc(100svh - 145px);background:#fff}
+    .custom-order-embed iframe{display:block;width:100%!important;min-height:max(760px,calc(100svh - 145px));border:0}
+    .custom-order-embed noscript{display:block;padding:24px;text-align:center;color:#5e6875}
+    .custom-order-embed noscript a{font-weight:800;color:#0b2038;text-decoration:underline}
+    @media(max-width:680px){
+      .custom-order-heading{padding:15px 0}
+      .custom-order-heading-inner{align-items:flex-start;flex-direction:column;gap:10px}
+      .custom-order-help{text-align:left}
+      .custom-order-embed{min-height:calc(100svh - 160px)}
+      .custom-order-embed iframe{min-height:max(720px,calc(100svh - 160px))}
+    }
   </style>
 </head>
-<body>
-  <main>
-    <h1>Opening Advanced custom ordering…</h1>
-    <p>You are being sent to Advanced Embroidery's PrintFlow ordering studio.</p>
-    <a href="https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing">Continue to custom ordering</a>
-  </main>
-  <script>
-    location.replace("https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing");
-  </script>
+<body class="order-landing-page">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="announcement">
+  <div class="container announcement-inner">
+    <span>Custom embroidery, screen printing and DTF production in New Bedford, Massachusetts</span>
+    <span><a href="tel:+15086788993">Call 508-678-8993</a> · English &amp; Portuguese assistance</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="/" aria-label="Advanced Embroidery home">
+      <img src="/assets/logo/logo.png" alt="Advanced Embroidery &amp; Screen Printing">
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/services/">Services</a>
+      <a href="/who-we-serve/">Who We Serve</a>
+      <a href="/gallery/">Our Work</a>
+      <a href="/about/">About</a>
+      <a href="/how-it-works/">How It Works</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="/order/" aria-current="page">Start an Order</a>
+    <button class="menu-button" id="menuButton" aria-label="Open navigation" aria-expanded="false" aria-controls="mobilePanel">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="/">Home</a>
+  <a href="/services/">Services</a>
+  <a href="/who-we-serve/">Who We Serve</a>
+  <a href="/gallery/">Our Work</a>
+  <a href="/about/">About</a>
+  <a href="/how-it-works/">How It Works</a>
+  <a href="/contact/">Contact</a>
+  <a class="btn btn-primary" href="/order/">Start an Order</a>
+</div>
+
+<main id="main">
+  <section class="custom-order-heading" aria-labelledby="custom-order-title">
+    <div class="container custom-order-heading-inner">
+      <div>
+        <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/order/">Start an Order</a><span>/</span><span>Custom Apparel</span></div>
+        <h1 id="custom-order-title">Custom Apparel Ordering</h1>
+      </div>
+      <p class="custom-order-help">Need help? <a href="tel:+15086788993">Call 508-678-8993</a></p>
+    </div>
+  </section>
+
+  <section class="custom-order-embed" aria-label="Advanced Embroidery custom apparel order form">
+    <script src="https://printflow-bcjh.vercel.app//embed.js" data-shop="advanced-embroidery-screen-printing"></script>
+    <noscript>Enable JavaScript to use the custom order form, or <a href="https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing">open the secure order page</a>.</noscript>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="/assets/logo/logo.png" alt="Advanced Embroidery &amp; Screen Printing"></div>
+        <p class="small">Professional custom apparel for businesses, schools, teams, organizations and individuals—made with care in New Bedford since 2003.</p>
+      </div>
+      <div>
+        <div class="footer-title">Explore</div>
+        <div class="footer-links"><a href="/services/">Services</a><a href="/gallery/">Our Work</a><a href="/about/">About</a><a href="/faq/">FAQ</a></div>
+      </div>
+      <div>
+        <div class="footer-title">Order</div>
+        <div class="footer-links"><a href="/order/">Custom Project</a><a href="/school-stores/">School &amp; Program Stores</a><a href="/espirito-santo/">Espirito Santo Uniforms</a><a href="/how-it-works/">How Ordering Works</a></div>
+      </div>
+      <div>
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <a href="tel:+15086788993">508-678-8993</a>
+          <a href="mailto:mpimentel1363@gmail.com">mpimentel1363@gmail.com</a>
+          <a href="https://maps.google.com/?q=2883+Acushnet+Avenue+New+Bedford+MA+02745" target="_blank" rel="noopener">2883 Acushnet Avenue<br>New Bedford, MA 02745</a>
+          <span>Call ahead before visiting.</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Advanced Embroidery &amp; Screen Printing. All rights reserved.</span>
+      <span><a href="/privacy/">Privacy</a> · <a href="/terms/">Order Policies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>
