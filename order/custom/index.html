@@ -23,16 +23,16 @@
     .custom-order-heading h1{margin:0;font-size:clamp(1.55rem,2.5vw,2.15rem);line-height:1.15;letter-spacing:-.035em;color:#0b2038}
     .custom-order-help{margin:0;color:#5e6875;font-size:.93rem;text-align:right}
     .custom-order-help a{color:#0b2038;font-weight:800;white-space:nowrap}
-    .custom-order-embed{width:100%;min-height:calc(100svh - 145px);background:#fff}
-    .custom-order-embed iframe{display:block;width:100%!important;min-height:max(760px,calc(100svh - 145px));border:0}
+    .custom-order-embed{width:100%;min-height:1250px;background:#fff;overflow:visible}
+    .custom-order-embed iframe{display:block;width:100%!important;height:1250px;min-height:1250px;border:0}
     .custom-order-embed noscript{display:block;padding:24px;text-align:center;color:#5e6875}
     .custom-order-embed noscript a{font-weight:800;color:#0b2038;text-decoration:underline}
     @media(max-width:680px){
       .custom-order-heading{padding:15px 0}
       .custom-order-heading-inner{align-items:flex-start;flex-direction:column;gap:10px}
       .custom-order-help{text-align:left}
-      .custom-order-embed{min-height:calc(100svh - 160px)}
-      .custom-order-embed iframe{min-height:max(720px,calc(100svh - 160px))}
+      .custom-order-embed{min-height:1100px}
+      .custom-order-embed iframe{height:1100px;min-height:1100px}
     }
   </style>
 </head>
@@ -90,6 +90,23 @@
   </section>
 
   <section class="custom-order-embed" aria-label="Advanced Embroidery custom apparel order form">
+    <script>
+      (() => {
+        const printflowOrigin = 'https://printflow-bcjh.vercel.app';
+        const embedSection = document.currentScript.parentElement;
+        window.addEventListener('message', (event) => {
+          if (event.origin !== printflowOrigin || !event.data || event.data.type !== 'printflow:resize') return;
+          const frame = [...embedSection.querySelectorAll('iframe')].find((item) => item.contentWindow === event.source);
+          if (!frame) return;
+          const reportedHeight = Number(event.data.height);
+          if (!Number.isFinite(reportedHeight) || reportedHeight <= 0) return;
+          const height = Math.max(900, Math.min(16000, Math.ceil(reportedHeight)));
+          frame.style.setProperty('height', `${height}px`, 'important');
+          frame.style.setProperty('min-height', '0', 'important');
+          frame.setAttribute('scrolling', 'no');
+        });
+      })();
+    </script>
     <script src="https://printflow-bcjh.vercel.app//embed.js" data-shop="advanced-embroidery-screen-printing"></script>
     <noscript>Enable JavaScript to use the custom order form, or <a href="https://printflow-bcjh.vercel.app/s/advanced-embroidery-screen-printing">open the secure order page</a>.</noscript>
   </section>
